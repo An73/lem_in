@@ -28,8 +28,9 @@ typedef struct s_room
 
 typedef struct		s_way
 {
+	char		*name_room;
 	t_room			*content;
-	size_t			content_size;
+	int			content_size;
 	struct s_way	*next;
 }					t_way;
 
@@ -40,7 +41,9 @@ int		ft_atoi_lem(char *str);
 void	display_error(char *str);
 void	plag_room(char **room, t_room **room_head);
 char	way_first(char *str);
-void	start_way(char *str, t_room **head);
+char	start_way(char *str, t_room **head);
 void	test_way(t_room **head);
+void	recur(/*t_room *room, */t_way *head, int line);
+void	return_trip(char *str, t_room **head);
 
 #endif

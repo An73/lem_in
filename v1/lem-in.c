@@ -97,6 +97,7 @@ int		main(void)
 {
 	char	*str;
 	int		num_lem;
+	char	check_way;
 	t_room	*room_head;
 
 	num_lem = 0;
@@ -112,9 +113,14 @@ int		main(void)
 			pushback(&room_head, new_room(str, 0, &room_head));
 		//printf("%d\n", error_check(str, &num_lem));
 	}
-	start_way(str, &room_head);
-	while (get_next_line(0, &str))
-		start_way(str, &room_head);
+	check_way = start_way(str, &room_head);
+	return_trip(str, &room_head);
+	while (check_way && get_next_line(0, &str))
+	{
+		check_way = start_way(str, &room_head);
+		return_trip(str, &room_head);
+	}
+	recur(room_head->next_way, 1);
 	test_way(&room_head);
 	/*while (room_head)
 	{
