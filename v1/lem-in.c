@@ -99,6 +99,7 @@ int		main(void)
 	int		num_lem;
 	char	check_way;
 	t_room	*room_head;
+	t_arr_way *arrays_head = NULL;
 
 	num_lem = 0;
 	while (num_lem == 0 && get_next_line(0, &str))
@@ -121,7 +122,11 @@ int		main(void)
 		return_trip(str, &room_head);
 	}
 	recur(room_head->next_way, 1);
+	fin(&room_head);
+	sort_list(&room_head);
+	list_way(&arrays_head, head_way(&room_head));
 	test_way(&room_head);
+	test_arr(&arrays_head);
 	/*while (room_head)
 	{
 		printf("\nname = %s\nx = %d\ny = %d\nst = %d\n\n", room_head->name, room_head->x, room_head->y, room_head->status);

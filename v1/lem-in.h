@@ -34,6 +34,20 @@ typedef struct		s_way
 	struct s_way	*next;
 }					t_way;
 
+typedef struct  	s_arr_way
+{
+	int		content_size;
+	int		num;
+	struct s_arr_way *next;
+	struct s_down *next_down;
+}					t_arr_way;
+
+typedef struct  	s_down
+{
+	char	*name;
+	int		id_lem;
+	struct 	s_down *next;
+}					t_down;
 
 void	n_lem(char *str, int *num);
 void	start_end_check(t_room **room_head, int st);
@@ -45,5 +59,15 @@ char	start_way(char *str, t_room **head);
 void	test_way(t_room **head);
 void	recur(/*t_room *room, */t_way *head, int line);
 void	return_trip(char *str, t_room **head);
+int	fin(t_room **head);
+void	sort_list(t_room **head);
+
+
+void	list_way(t_arr_way **head, t_way *head_fin);
+void	test_arr(t_arr_way **head);
+t_way	*head_way(t_room  **head);
+/*t_arr_way	**arr_way(t_way *head_fin);
+void	test_arr(t_arr_way **arrays);
+t_way	*head_way(t_room  **head);*/
 
 #endif
