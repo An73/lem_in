@@ -23,7 +23,7 @@ char	check_check(t_arr_way **head, char *name)
 		down = current->next_down;
 		while (down)
 		{
-			write(1, "2", 1);
+			//write(1, "2", 1);
 			if (ft_strequ(down->name, name))
 				return (0);
 			down = down->next;
@@ -39,7 +39,9 @@ t_down *elem_way(t_way *way)
 
 	new = (t_down*)malloc(sizeof(t_down));
 	new->name = ft_strdup(way->name_room);
+	new->id_lem = 0;
 	new->next = NULL;
+	new->back = NULL;
 	return (new);
 }
 
@@ -67,6 +69,7 @@ void	list_add_start(t_down **head, t_down *new)
 	else
 	{
 		new->next = *head;
+		(*head)->back = new;
 		*head = new;
 	}
 }
@@ -82,15 +85,13 @@ t_down	*rave_way(t_way *way, t_arr_way **head)
 	head_down = NULL;
 	while (current && current->content_size != 1)
 	{
-		printf("name _room = %s\n", current->name_room);
-		write(1, "+", 1);
+		//printf("name _room = %s\n", current->name_room);
 		//printf("%s --> %s\n", current->name_room, current->content->name);
 		if (num == -1 || (check_check(head, current->content->name) && current->content->next_way->content_size < num))
 		{
-			write(1, "=", 1);
 			//pushback_down(&head_down, elem_way(current));
 			list_add_start(&head_down, elem_way(current));
-			printf("[%s IF ]\n", head_down->name);
+			//printf("[%s IF ]\n", head_down->name);
 			current = current->content->next_way;
 			num = current->content_size;
 		}
@@ -159,13 +160,14 @@ void	test_arr(t_arr_way **head)
 	current = *head;
 	while (current != NULL)
 	{
+		//printf("num = %d\n", current->num);
 		cur_down = current->next_down;
 		while (cur_down != NULL)
 		{
-			printf("['%s']->", cur_down->name);
+			//printf("['%s']->", cur_down->name);
 			cur_down = cur_down->next;
 		}
-		printf("\n");
+		//printf("\n");
 		current = current->next;
 	}
 }

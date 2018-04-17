@@ -47,6 +47,7 @@ typedef struct  	s_down
 	char	*name;
 	int		id_lem;
 	struct 	s_down *next;
+	struct 	s_down *back;
 }					t_down;
 
 void	n_lem(char *str, int *num);
@@ -66,6 +67,12 @@ void	sort_list(t_room **head);
 void	list_way(t_arr_way **head, t_way *head_fin);
 void	test_arr(t_arr_way **head);
 t_way	*head_way(t_room  **head);
+void	distribution(t_arr_way **head);
+void	run(int	num_lem, t_arr_way **head);
+
+void	check_valid_way(t_arr_way **head, t_way *start);
+t_way	*st_way(t_room  **head);
+char	go_stop(t_arr_way **head);
 /*t_arr_way	**arr_way(t_way *head_fin);
 void	test_arr(t_arr_way **arrays);
 t_way	*head_way(t_room  **head);*/

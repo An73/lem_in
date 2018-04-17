@@ -2,7 +2,8 @@ NAME = lem-in
 
 LBMK = make -C libft/ fclean && make -C libft/
 
-SRCS = error_check.c get_next_line.c lem-in.c atoi_lem.c way.c wave.c fin.c list_way.c
+SRCS = error_check.c get_next_line.c lem-in.c atoi_lem.c way.c wave.c fin.c list_way.c \
+run.c check_valid_way.c
 
 GCCO = gcc -Wall -Wextra -Werror -c $(SRCS) -Ilem-in.h
 GCC = gcc -Wall -Wextra -Werror *.o ./libft/libft.a -o lem-in

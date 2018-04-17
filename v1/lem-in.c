@@ -125,8 +125,11 @@ int		main(void)
 	fin(&room_head);
 	sort_list(&room_head);
 	list_way(&arrays_head, head_way(&room_head));
+	distribution(&arrays_head);
+	check_valid_way(&arrays_head, st_way(&room_head));
 	test_way(&room_head);
 	test_arr(&arrays_head);
+	run(num_lem, &arrays_head);
 	/*while (room_head)
 	{
 		printf("\nname = %s\nx = %d\ny = %d\nst = %d\n\n", room_head->name, room_head->x, room_head->y, room_head->status);

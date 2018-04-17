@@ -113,7 +113,7 @@ void	test_way(t_room **head)
 			cur_way = current->next_way;
 			while (cur_way != NULL)
 			{
-				printf("start %s (line = %d, name = %s) -----> end %s\n", current->name, cur_way->content_size, cur_way->name_room, cur_way->content->name);
+				//printf("start %s (line = %d, name = %s) -----> end %s\n", current->name, cur_way->content_size, cur_way->name_room, cur_way->content->name);
 				cur_way = cur_way->next;
 			}
 		}
