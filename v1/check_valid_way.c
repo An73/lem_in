@@ -12,6 +12,19 @@
 
 #include "lem-in.h"
 
+void	num_fin(t_arr_way **head, t_way *fin)
+{
+	t_arr_way *current;
+
+	current = *head;
+	while (current)
+	{
+		if (ft_strequ(current->next_down->name, fin->name_room))
+			current->num = 0;
+		current = current->next;
+	}
+}
+
 t_way	*st_way(t_room  **head)
 {
 	t_room	*current;

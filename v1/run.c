@@ -39,22 +39,25 @@ void	distribution(t_arr_way **head)
 	}
 }
 
-void	printer(t_down *head)
+void	printer(t_down *head, char flag)
 {
 	t_down *current;
 
 	current = head;
 	while (current)
 	{
-		if (current->id_lem != 0 && current->next != NULL)
-			ft_printf("L%d-%s ", current->id_lem, current->name);
-		/*else if (current->id_lem != 0)
-			ft_printf("L%d-%s", current->id_lem, current->name);*/
+		if (current->id_lem != 0)
+		{
+			if (flag != 0)
+				ft_printf(" ");
+			ft_printf("L%d-%s", current->id_lem, current->name);
+			flag = 1;
+		}
 		current = current->next;
 	}
 }
 
-void	rider(int id, t_down *head)
+void	rider(int id, t_down *head, char flag)
 {
 	t_down *current;
 
@@ -67,29 +70,33 @@ void	rider(int id, t_down *head)
 		current = current->back;
 	}
 	current->id_lem = id;
-	printer(head);
+	printer(head, flag);
 }
 
 void	run(int	num_lem, t_arr_way **head)
 {
 	int		id;
+	char	flag;
 	t_arr_way *current;
 
 	id = 1;
 	while (id == 1 || go_stop(head))
 	{
 		current = *head;
+		flag = 0;
 		while (current)
 		{
 			if (current->num != -1 && (num_lem - id) >= current->num)
 			{
-				rider(id, current->next_down);
+				rider(id, current->next_down, flag);
 				id++;
+				flag = 1;
 			}
 			else if (current->num != -1)
-				rider(0, current->next_down);
+				rider(0, current->next_down, flag);
 			current = current->next;
 		}
-		ft_printf("\n");
+		if (go_stop(head))
+			ft_printf("\n");
 	}
 }

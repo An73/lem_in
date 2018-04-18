@@ -81,7 +81,14 @@ void	plag_room(char **room, t_room **room_head)
 
 char	way_first(char *str)
 {
-	if (ft_strlen(str) == 3 && str[1] == '-')
+	char **arr;
+	int		i;
+
+	arr = ft_strsplit(str, '-');
+	i = 0;
+	while (arr[i])
+		i++;
+	if (i == 2)
 		return (1);
 	return (0);
 }

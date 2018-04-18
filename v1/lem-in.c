@@ -119,7 +119,8 @@ int		main(void)
 	while (check_way && get_next_line(0, &str))
 	{
 		check_way = start_way(str, &room_head);
-		return_trip(str, &room_head);
+		if (check_way)
+			return_trip(str, &room_head);
 	}
 	recur(room_head->next_way, 1);
 	fin(&room_head);
