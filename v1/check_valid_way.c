@@ -77,3 +77,17 @@ char	go_stop(t_arr_way **head)
 	}
 	return (0);
 }
+
+char	way_check(t_arr_way **head)
+{
+	t_arr_way *current;
+
+	current = *head;
+	while (current)
+	{
+		if (current->num != -1)
+			return (1);
+		current = current->next;
+	}
+	return (0);
+}

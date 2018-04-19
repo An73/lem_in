@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem-in.c                                           :+:      :+:    :+:   */
+/*   strjoin_lem.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dkotenko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/11 16:05:16 by dkotenko          #+#    #+#             */
-/*   Updated: 2018/04/11 16:05:17 by dkotenko         ###   ########.fr       */
+/*   Created: 2018/04/19 16:20:35 by dkotenko          #+#    #+#             */
+/*   Updated: 2018/04/19 16:20:37 by dkotenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
-#include <stdio.h>
 
-int		main(void)
+void	strjoin_lem(char **write, char *str)
 {
-	char	*writer;
-	int		num_lem;
-	char	check_way;
-	t_room	*room_head;
+	char  *tmp;
 
-	num_lem = 0;
-	writer = NULL;
-	room_head = NULL;
-	check_way = first_b(&num_lem, &writer, &room_head);
-	second_block(check_way, &writer, &room_head);
-	body(room_head, num_lem, writer);
+	tmp = *write;
+	*write = ft_strjoin(*write, "\n");
+	free(tmp);
+	tmp = *write;
+	*write = ft_strjoin(*write, str);
+	free(tmp);
 }

@@ -50,7 +50,7 @@ typedef struct  	s_down
 	struct 	s_down *back;
 }					t_down;
 
-void	n_lem(char *str, int *num);
+void	n_lem(char *str, int *num, char **writer);
 void	start_end_check(t_room **room_head, int st);
 int		ft_atoi_lem(char *str);
 void	display_error(char *str);
@@ -73,6 +73,16 @@ void	run(int	num_lem, t_arr_way **head);
 void	check_valid_way(t_arr_way **head, t_way *start);
 t_way	*st_way(t_room  **head);
 char	go_stop(t_arr_way **head);
+char	way_check(t_arr_way **head);
+void	body(t_room *room_head, int num_lem, char *writer);
+char	start_and_end(t_room *room_head);
+
+void	strjoin_lem(char **write, char *str);
+char	first_b(int *num_lem, char **writer, t_room **room_head);
+void	second_block(char check_way, char **writer, t_room **room_head);
+
+void	free_array(char **arr);
+void	free_lst(t_room **head);
 /*t_arr_way	**arr_way(t_way *head_fin);
 void	test_arr(t_arr_way **arrays);
 t_way	*head_way(t_room  **head);*/

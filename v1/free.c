@@ -1,29 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem-in.c                                           :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dkotenko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/11 16:05:16 by dkotenko          #+#    #+#             */
-/*   Updated: 2018/04/11 16:05:17 by dkotenko         ###   ########.fr       */
+/*   Created: 2018/04/19 21:04:49 by dkotenko          #+#    #+#             */
+/*   Updated: 2018/04/19 21:04:50 by dkotenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem-in.h"
-#include <stdio.h>
 
-int		main(void)
+void	free_array(char **arr)
 {
-	char	*writer;
-	int		num_lem;
-	char	check_way;
-	t_room	*room_head;
+	int		i;
 
-	num_lem = 0;
-	writer = NULL;
-	room_head = NULL;
-	check_way = first_b(&num_lem, &writer, &room_head);
-	second_block(check_way, &writer, &room_head);
-	body(room_head, num_lem, writer);
+	i = 0;
+	while(arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
 }
+
+void	free_lst(t_room **head)
+{
+	t_room *current;
+	t_room	*buff;
+
+	current = *head;
+	while (current != NULL)
+	{
+		buff = current->next;
+		free(current->name);
+		free(current);
+		current = buff;
+	}
+	*head = NULL;
+}
+

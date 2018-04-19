@@ -83,7 +83,7 @@ t_down	*rave_way(t_way *way, t_arr_way **head)
 	num = -1;
 	current = way;
 	head_down = NULL;
-	while (current && current->content_size != 1)
+	while (current /*&& current->content_size != 1*/)
 	{
 		//printf("name _room = %s\n", current->name_room);
 		//printf("%s --> %s\n", current->name_room, current->content->name);

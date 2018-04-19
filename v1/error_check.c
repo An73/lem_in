@@ -13,6 +13,29 @@
 #include "lem-in.h"
 #include <stdio.h>
 
+char	start_and_end(t_room *room_head)
+{
+	t_room *current;
+
+	current = room_head;
+	while (current)
+	{
+		if (current->status == 1)
+		{
+			current = room_head;
+			while (current)
+			{
+				if (current->status == 2)
+					return (1);
+				current = current->next;
+			}
+			return (0);
+		}
+		current = current->next;
+	}
+	return (0);
+}
+
 int		str_to_num(char *str)
 {
 	int		i;
@@ -31,7 +54,7 @@ int		str_to_num(char *str)
 	return (num);
 }
 
-void	n_lem(char *str, int *num)
+void	n_lem(char *str, int *num, char **writer)
 {
 	if ((ft_strequ(str, "##start") || ft_strequ(str, "##end")) && *num == 0)
 		display_error("no amount of ants");
@@ -40,6 +63,13 @@ void	n_lem(char *str, int *num)
 		*num = str_to_num(str);
 		if (*num <= 0)
 			display_error("invalid number");
+	}
+	if (*writer == NULL)
+		*writer = ft_strdup(str);
+	else
+	{
+		*writer = ft_strjoin(*writer, "\n");
+		*writer = ft_strjoin(*writer, str);
 	}
 }
 
@@ -89,6 +119,10 @@ char	way_first(char *str)
 	while (arr[i])
 		i++;
 	if (i == 2)
+	{
+		free_array(arr);
 		return (1);
+	}
+	free_array(arr);
 	return (0);
 }
