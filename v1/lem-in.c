@@ -26,4 +26,6 @@ int		main(void)
 	check_way = first_b(&num_lem, &writer, &room_head);
 	second_block(check_way, &writer, &room_head);
 	body(room_head, num_lem, writer);
+	free_lst_room(&room_head);
+	//system("leaks lem-in");
 }

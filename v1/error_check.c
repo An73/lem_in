@@ -114,15 +114,19 @@ char	way_first(char *str)
 	char **arr;
 	int		i;
 
-	arr = ft_strsplit(str, '-');
-	i = 0;
-	while (arr[i])
-		i++;
-	if (i == 2)
+	if (!ft_strchr(str, ' '))
 	{
+		arr = ft_strsplit(str, '-');
+		i = 0;
+		while (arr[i])
+			i++;
+		if (i == 2)
+		{
+			free_array(arr);
+			return (1);
+		}
 		free_array(arr);
-		return (1);
+		return (0);
 	}
-	free_array(arr);
 	return (0);
 }

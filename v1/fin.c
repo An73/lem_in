@@ -45,7 +45,7 @@ void	sort(t_way *head)
 
 	last = NULL;
 	q = 1;
-	while (q)
+	while (q && head != NULL)
 	{
 		q = 0;
 		current = head;

@@ -19,7 +19,10 @@ void	second_block(char check_way, char **writer, t_room **room_head)
 	while (check_way && get_next_line(0, &str))
 	{
 		if (ft_strequ(str, "##start") || ft_strequ(str, "##end"))
+		{
+			free(str);
 			display_error("second ##start or ##end");
+		}
 		else if (str[0] == '#')
 			strjoin_lem(writer, str);
 		else
@@ -31,5 +34,8 @@ void	second_block(char check_way, char **writer, t_room **room_head)
 				strjoin_lem(writer, str);
 			}
 		}
+		free(str);
 	}
+	if (check_way)
+		free(str);
 }

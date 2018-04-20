@@ -51,7 +51,9 @@ void	body(t_room *room_head, int num_lem, char *writer)
 	{
 		ft_printf("%s\n\n", writer);
 		run(num_lem, &arrays_head);
-		//free(writer);
+		free(writer);
+		free_way(&arrays_head);
+		//free_lst_room(&room_head);
 		//system("leaks lem-in");
 	}
 	else

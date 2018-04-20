@@ -82,7 +82,8 @@ char	first_b(int *num_lem, char **writer, t_room **room_head);
 void	second_block(char check_way, char **writer, t_room **room_head);
 
 void	free_array(char **arr);
-void	free_lst(t_room **head);
+void	free_lst_room(t_room **head);
+void	free_way(t_arr_way **head);
 /*t_arr_way	**arr_way(t_way *head_fin);
 void	test_arr(t_arr_way **arrays);
 t_way	*head_way(t_room  **head);*/

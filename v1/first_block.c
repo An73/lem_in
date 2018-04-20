@@ -75,7 +75,7 @@ void		pushback(t_room **head, t_room *new)
 		*head = new;
 }
 
-void	start_end(t_room **room_head, char *st_end)
+void	start_end(t_room **room_head, char *st_end, char **writer)
 {
 	char	*str;
 	//t_room	n_room;
@@ -86,11 +86,13 @@ void	start_end(t_room **room_head, char *st_end)
 		{
 			start_end_check(room_head, 1);
 			pushback(room_head, new_room(str, 1, room_head));
+			strjoin_lem(writer, str);
 		}
 		else if (ft_strequ(st_end, "##end"))
 		{
 			start_end_check(room_head, 2);
 			pushback(room_head, new_room(str, 2, room_head));
+			strjoin_lem(writer, str);
 		}
 	}
 	free(str);
@@ -103,26 +105,36 @@ char	first_b(int *num_lem, char **writer, t_room **room_head)
 
 	while (*num_lem == 0 && get_next_line(0, &str))
 		n_lem(str, num_lem, writer);
+	if (*num_lem == 0)
+		exit(1);
 	free(str);
 	while (get_next_line(0, &str) && !way_first(str))
 	{
 		if (ft_strequ(str, "##start") || ft_strequ(str, "##end"))
-			start_end(room_head, str);
+		{
+			strjoin_lem(writer, str);
+			start_end(room_head, str, writer);
+		}
 		else if (str[0] == '#')
 			;
 		else
 			pushback(room_head, new_room(str, 0, room_head));
 		if (!way_first(str)){
-			strjoin_lem(writer, str);
+			if (!ft_strequ(str, "##start") && !ft_strequ(str, "##end"))
+				strjoin_lem(writer, str);
 			free(str);
 		}
 	}
 	//system("leaks lem-in");
 	if (!way_first(str) || !start_and_end(*room_head))
+	{
+		free(str);
 		display_error("no way");
+	}
 	check_way = start_way(str, room_head);
 	return_trip(str, room_head);
 	if (check_way)
 		strjoin_lem(writer, str);
+	free(str);
 	return (check_way);
 }

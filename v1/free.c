@@ -22,9 +22,26 @@ void	free_array(char **arr)
 		free(arr[i]);
 		i++;
 	}
+	free(arr);
 }
 
-void	free_lst(t_room **head)
+void	free_lst(t_way *head)
+{
+	t_way *current;
+	t_way	*buff;
+
+	current = head;
+	while (current != NULL)
+	{
+		buff = current->next;
+		free(current->name_room);
+		free(current);
+		current = buff;
+	}
+	head = NULL;
+}
+
+void	free_lst_room(t_room **head)
 {
 	t_room *current;
 	t_room	*buff;
@@ -33,6 +50,7 @@ void	free_lst(t_room **head)
 	while (current != NULL)
 	{
 		buff = current->next;
+		free_lst(current->next_way);
 		free(current->name);
 		free(current);
 		current = buff;
@@ -40,3 +58,34 @@ void	free_lst(t_room **head)
 	*head = NULL;
 }
 
+void	free_down(t_down *head)
+{
+	t_down *current;
+	t_down	*buff;
+
+	current = head;
+	while (current != NULL)
+	{
+		buff = current->next;
+		free(current->name);
+		free(current);
+		current = buff;
+	}
+	head = NULL;
+}
+
+void	free_way(t_arr_way **head)
+{
+	t_arr_way *current;
+	t_arr_way	*buff;
+
+	current = *head;
+	while (current != NULL)
+	{
+		buff = current->next;
+		free_down(current->next_down);
+		free(current);
+		current = buff;
+	}
+	*head = NULL;
+}

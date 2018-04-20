@@ -65,8 +65,7 @@ void	move(int *num, t_list **wanted, int *len)
 	num[0] = 0;
 	if (num[1] > 0)
 		num[0] = 1;
-	if ((num[1] > 0 && *wanted != NULL) || \
-		(num[1] == 0 && number_n(&(*wanted)) > 0))
+	if ((num[1] > 0 && *wanted != NULL) )
 	{
 		*len = ft_strchr((*wanted)->content, '\n') - \
 		((char*)(*wanted)->content) + 1;
@@ -79,11 +78,12 @@ void	move(int *num, t_list **wanted, int *len)
 
 void	line_f(int *len, t_list **wanted, char **line)
 {
-	if (ft_strchr((*wanted)->content, '\n') != NULL)
+	if (*wanted != NULL && ft_strchr((*wanted)->content, '\n') != NULL)
 		*len = ft_strchr((*wanted)->content, '\n') - (char*)(*wanted)->content;
-	else
+	else if (*wanted != NULL)
 		*len = ft_strchr((*wanted)->content, '\0') - (char*)(*wanted)->content;
-	*line = ft_strsub((*wanted)->content, 0, *len);
+	if (*wanted != NULL)
+		*line = ft_strsub((*wanted)->content, 0, *len);
 }
 
 int		get_next_line(const int fd, char **line)
@@ -104,7 +104,7 @@ int		get_next_line(const int fd, char **line)
 	move(num, &wanted, &len);
 	if (num[1] > 0)
 		ft(&temp, &wanted, str, fd);
-	while (ft_strchr(wanted->content, '\n') == NULL && num[1] > 0)
+	while (num[1] > 0 && ft_strchr(wanted->content, '\n') == NULL)
 	{
 		ft_bzero(&str, BUFF_SIZE + 1);
 		num[1] = read(fd, &str, BUFF_SIZE);
