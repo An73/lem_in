@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 void	num_fin(t_arr_way **head, t_way *fin)
 {
-	t_arr_way *current;
+	t_arr_way	*current;
 
 	current = *head;
 	while (current)
@@ -25,7 +25,7 @@ void	num_fin(t_arr_way **head, t_way *fin)
 	}
 }
 
-t_way	*st_way(t_room  **head)
+t_way	*st_way(t_room **head)
 {
 	t_room	*current;
 
@@ -37,9 +37,9 @@ t_way	*st_way(t_room  **head)
 
 void	check_valid_way(t_arr_way **head, t_way *start)
 {
-	t_arr_way *current;
-	t_way *st_cur;
-	int		check;
+	t_arr_way	*current;
+	t_way		*st_cur;
+	int			check;
 
 	current = *head;
 	while (current)
@@ -60,8 +60,8 @@ void	check_valid_way(t_arr_way **head, t_way *start)
 
 char	go_stop(t_arr_way **head)
 {
-	t_arr_way *current;
-	t_down 	*down;
+	t_arr_way	*current;
+	t_down		*down;
 
 	current = *head;
 	while (current)

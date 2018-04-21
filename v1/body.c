@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 void	way_start_end(t_room *room_head)
 {
 	t_room *current;
 
 	current = room_head;
-	while(current)
+	while (current)
 	{
 		if (current->status == 1 && current->next_way != NULL)
 		{
@@ -53,8 +53,6 @@ void	body(t_room *room_head, int num_lem, char *writer)
 		run(num_lem, &arrays_head);
 		free(writer);
 		free_way(&arrays_head);
-		//free_lst_room(&room_head);
-		//system("leaks lem-in");
 	}
 	else
 		display_error("invalid way");

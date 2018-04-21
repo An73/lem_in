@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 char	check_room(char *str)
 {
@@ -25,7 +25,7 @@ char	check_room(char *str)
 			sp++;
 		i++;
 	}
-	if (sp == 2)
+	if (sp == 2 && str[0] != ' ' && str[0] != 'L')
 		return (1);
 	return (0);
 }
@@ -56,46 +56,55 @@ t_room	*new_room(char *str, int st, t_room **room_head)
 	else
 		display_error("invalid room");
 	free_array(arr_room);
-
 	return (new);
-}
-
-void		pushback(t_room **head, t_room *new)
-{
-	t_room *current;
-
-	current = *head;
-	if (*head != NULL)
-	{
-		while (current->next != NULL)
-			current = current->next;
-		current->next = new;
-	}
-	else
-		*head = new;
 }
 
 void	start_end(t_room **room_head, char *st_end, char **writer)
 {
 	char	*str;
-	//t_room	n_room;
+	int		check;
 
-	if (get_next_line(0, &str))
+	check = 0;
+	while (check == 0 && get_next_line(0, &str))
 	{
-		if (ft_strequ(st_end, "##start"))
+		if (str[0] == '#' && !ft_strequ(str, "##start")\
+			&& !ft_strequ(str, "##end"))
+			strjoin_lem(writer, str);
+		else if (ft_strequ(st_end, "##start"))
 		{
 			start_end_check(room_head, 1);
 			pushback(room_head, new_room(str, 1, room_head));
 			strjoin_lem(writer, str);
+			check = 1;
 		}
 		else if (ft_strequ(st_end, "##end"))
 		{
 			start_end_check(room_head, 2);
 			pushback(room_head, new_room(str, 2, room_head));
 			strjoin_lem(writer, str);
+			check = 1;
 		}
+		free(str);
 	}
-	free(str);
+}
+
+void	cicle(char **str, char **writer, t_room **room_head)
+{
+	if (ft_strequ(*str, "##start") || ft_strequ(*str, "##end"))
+	{
+		strjoin_lem(writer, *str);
+		start_end(room_head, *str, writer);
+	}
+	else if ((*str)[0] == '#')
+		;
+	else
+		pushback(room_head, new_room(*str, 0, room_head));
+	if (!way_first(*str))
+	{
+		if (!ft_strequ(*str, "##start") && !ft_strequ(*str, "##end"))
+			strjoin_lem(writer, *str);
+		free(*str);
+	}
 }
 
 char	first_b(int *num_lem, char **writer, t_room **room_head)
@@ -109,32 +118,18 @@ char	first_b(int *num_lem, char **writer, t_room **room_head)
 		exit(1);
 	free(str);
 	while (get_next_line(0, &str) && !way_first(str))
-	{
-		if (ft_strequ(str, "##start") || ft_strequ(str, "##end"))
-		{
-			strjoin_lem(writer, str);
-			start_end(room_head, str, writer);
-		}
-		else if (str[0] == '#')
-			;
-		else
-			pushback(room_head, new_room(str, 0, room_head));
-		if (!way_first(str)){
-			if (!ft_strequ(str, "##start") && !ft_strequ(str, "##end"))
-				strjoin_lem(writer, str);
-			free(str);
-		}
-	}
-	//system("leaks lem-in");
+		cicle(&str, writer, room_head);
 	if (!way_first(str) || !start_and_end(*room_head))
 	{
 		free(str);
 		display_error("no way");
 	}
 	check_way = start_way(str, room_head);
-	return_trip(str, room_head);
 	if (check_way)
+	{
+		return_trip(str, room_head);
 		strjoin_lem(writer, str);
+	}
 	free(str);
 	return (check_way);
 }

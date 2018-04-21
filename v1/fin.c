@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
-int	fin(t_room **head)
+int		fin(t_room **head)
 {
-	t_room *current;
-	t_way *way_cur;
+	t_room	*current;
+	t_way	*way_cur;
 
 	current = *head;
 	while (current)
@@ -25,7 +25,8 @@ int	fin(t_room **head)
 			way_cur = current->next_way;
 			while (way_cur)
 			{
-				way_cur->content_size = way_cur->content->next_way->content_size;
+				way_cur->content_size =\
+				way_cur->content->next_way->content_size;
 				way_cur = way_cur->next;
 			}
 			return (1);
@@ -35,12 +36,23 @@ int	fin(t_room **head)
 	return (0);
 }
 
+void	swap_way(t_way **current)
+{
+	int		temp;
+	t_room	*content_temp;
+
+	temp = (*current)->content_size;
+	content_temp = (*current)->content;
+	(*current)->content_size = (*current)->next->content_size;
+	(*current)->content = (*current)->next->content;
+	(*current)->next->content_size = temp;
+	(*current)->next->content = content_temp;
+}
+
 void	sort(t_way *head)
 {
-	t_way *current;
-	t_way *last;
-	int		temp;
-	t_room 	*content_temp;
+	t_way	*current;
+	t_way	*last;
 	char	q;
 
 	last = NULL;
@@ -53,12 +65,7 @@ void	sort(t_way *head)
 		{
 			if (current->content_size > current->next->content_size)
 			{
-				temp = current->content_size;
-				content_temp = current->content;
-				current->content_size = current->next->content_size;
-				current->content = current->next->content;
-				current->next->content_size = temp;
-				current->next->content = content_temp;
+				swap_way(&current);
 				q = 1;
 			}
 			current = current->next;
@@ -79,7 +86,7 @@ void	sort_list(t_room **head)
 	}
 }
 
-t_way	*head_way(t_room  **head)
+t_way	*head_way(t_room **head)
 {
 	t_room	*current;
 

@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 void	second_block(char check_way, char **writer, t_room **room_head)
 {
-	char 	*str;
+	char	*str;
 
 	while (check_way && get_next_line(0, &str))
 	{

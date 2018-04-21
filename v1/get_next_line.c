@@ -65,7 +65,7 @@ void	move(int *num, t_list **wanted, int *len)
 	num[0] = 0;
 	if (num[1] > 0)
 		num[0] = 1;
-	if ((num[1] > 0 && *wanted != NULL) )
+	if ((num[1] > 0 && *wanted != NULL))
 	{
 		*len = ft_strchr((*wanted)->content, '\n') - \
 		((char*)(*wanted)->content) + 1;

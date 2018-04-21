@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 void	free_array(char **arr)
 {
 	int		i;
 
 	i = 0;
-	while(arr[i])
+	while (arr[i])
 	{
 		free(arr[i]);
 		i++;
@@ -27,7 +27,7 @@ void	free_array(char **arr)
 
 void	free_lst(t_way *head)
 {
-	t_way *current;
+	t_way	*current;
 	t_way	*buff;
 
 	current = head;
@@ -43,7 +43,7 @@ void	free_lst(t_way *head)
 
 void	free_lst_room(t_room **head)
 {
-	t_room *current;
+	t_room	*current;
 	t_room	*buff;
 
 	current = *head;
@@ -60,7 +60,7 @@ void	free_lst_room(t_room **head)
 
 void	free_down(t_down *head)
 {
-	t_down *current;
+	t_down	*current;
 	t_down	*buff;
 
 	current = head;
@@ -76,7 +76,7 @@ void	free_down(t_down *head)
 
 void	free_way(t_arr_way **head)
 {
-	t_arr_way *current;
+	t_arr_way	*current;
 	t_arr_way	*buff;
 
 	current = *head;

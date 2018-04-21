@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem-in.c                                           :+:      :+:    :+:   */
+/*   lem_in.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dkotenko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
-#include <stdio.h>
+#include "lem_in.h"
 
 int		main(void)
 {
@@ -27,5 +26,4 @@ int		main(void)
 	second_block(check_way, &writer, &room_head);
 	body(room_head, num_lem, writer);
 	free_lst_room(&room_head);
-	//system("leaks lem-in");
 }

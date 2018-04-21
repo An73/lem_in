@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
-char	check_check(t_arr_way **head, char *name)
+char		check_check(t_arr_way **head, char *name)
 {
-	t_arr_way *current;
-	t_down *down;
+	t_arr_way	*current;
+	t_down		*down;
 
 	current = *head;
 	while (current)
@@ -23,7 +23,6 @@ char	check_check(t_arr_way **head, char *name)
 		down = current->next_down;
 		while (down)
 		{
-			//write(1, "2", 1);
 			if (ft_strequ(down->name, name))
 				return (0);
 			down = down->next;
@@ -33,9 +32,9 @@ char	check_check(t_arr_way **head, char *name)
 	return (1);
 }
 
-t_down *elem_way(t_way *way)
+t_down		*elem_way(t_way *way)
 {
-	t_down *new;
+	t_down	*new;
 
 	new = (t_down*)malloc(sizeof(t_down));
 	new->name = ft_strdup(way->name_room);
@@ -45,68 +44,33 @@ t_down *elem_way(t_way *way)
 	return (new);
 }
 
-void		pushback_down(t_down **head, t_down *new)
+t_down		*rave_way(t_way *way, t_arr_way **head)
 {
-	t_down *current;
-
-	current = *head;
-	if (*head != NULL)
-	{
-		while (current->next != NULL)
-			current = current->next;
-		current->next = new;
-	}
-	else
-		*head = new;
-}
-
-void	list_add_start(t_down **head, t_down *new)
-{
-	if (*head == NULL)
-	{
-		*head = new;
-	}
-	else
-	{
-		new->next = *head;
-		(*head)->back = new;
-		*head = new;
-	}
-}
-
-t_down	*rave_way(t_way *way, t_arr_way **head)
-{
-	t_way *current;
-	t_down *head_down;
+	t_way	*current;
+	t_down	*head_down;
 	int		num;
 
 	num = -1;
 	current = way;
 	head_down = NULL;
-	while (current /*&& current->content_size != 1*/)
+	while (current)
 	{
-		//printf("name _room = %s\n", current->name_room);
-		//printf("%s --> %s\n", current->name_room, current->content->name);
-		if (num == -1 || (check_check(head, current->content->name) && current->content->next_way->content_size < num))
+		if (num == -1 || (check_check(head, current->content->name)\
+			&& current->content->next_way->content_size < num))
 		{
-			//pushback_down(&head_down, elem_way(current));
 			list_add_start(&head_down, elem_way(current));
-			//printf("[%s IF ]\n", head_down->name);
 			current = current->content->next_way;
 			num = current->content_size;
 		}
 		else
-		{
 			current = current->next;
-		}
 	}
-
 	return (head_down);
 }
 
 t_arr_way	*new_up(t_way *fin)
 {
-	t_arr_way *new;
+	t_arr_way	*new;
 
 	new = (t_arr_way*)malloc(sizeof(t_arr_way));
 	new->content_size = fin->content_size;
@@ -116,28 +80,12 @@ t_arr_way	*new_up(t_way *fin)
 	return (new);
 }
 
-void		pushback_arr(t_arr_way **head, t_arr_way *new)
+void		list_way(t_arr_way **head, t_way *head_fin)
 {
-	t_arr_way *current;
+	t_arr_way	*arr;
+	t_way		*way_current;
 
-	current = *head;
-	if (*head != NULL)
-	{
-		while (current->next != NULL)
-			current = current->next;
-		current->next = new;
-	}
-	else
-		*head = new;
-}
-
-void	list_way(t_arr_way **head, t_way *head_fin)
-{
-	t_arr_way *arr;
-	//int		cost;
-	t_way *way_current;
-
-	way_current  = head_fin;
+	way_current = head_fin;
 	while (way_current)
 	{
 		pushback_arr(head, new_up(way_current));
@@ -149,25 +97,5 @@ void	list_way(t_arr_way **head, t_way *head_fin)
 		arr->next_down = rave_way(head_fin, head);
 		arr = arr->next;
 		head_fin = head_fin->next;
-	}
-}	
-
-void	test_arr(t_arr_way **head)
-{
-	t_arr_way *current;
-	t_down *cur_down;
-
-	current = *head;
-	while (current != NULL)
-	{
-		//printf("num = %d\n", current->num);
-		cur_down = current->next_down;
-		while (cur_down != NULL)
-		{
-			//printf("['%s']->", cur_down->name);
-			cur_down = cur_down->next;
-		}
-		//printf("\n");
-		current = current->next;
 	}
 }

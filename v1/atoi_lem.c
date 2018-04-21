@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 int		ft_atoi_lem(char *str)
 {
@@ -26,9 +26,7 @@ int		ft_atoi_lem(char *str)
 		i++;
 	if (str[i] == '+' && str[i + 1] != '-')
 		i++;
-	if (str[i] != '-' && (str[i] < '0' || str[i] > '9'))
-		display_error("invalid coordinates");
-	if (str[i] == '-')
+	if (str[i] == '-' && str[i + 1])
 	{
 		neg = -1;
 		i++;
@@ -38,5 +36,7 @@ int		ft_atoi_lem(char *str)
 		sum = sum * 10 + str[i] - '0';
 		i++;
 	}
+	if (str[i] && (str[i] < '0' || str[i] > '9'))
+		display_error("invalid coordinates");
 	return (sum * neg);
 }

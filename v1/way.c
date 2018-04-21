@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
-t_way 	*new_way(char *end_room, t_room **head)
+t_way	*new_way(char *end_room, t_room **head)
 {
-	t_room *current;
+	t_room	*current;
 	t_way	*new;
 	char	check;
 
@@ -38,12 +38,11 @@ t_way 	*new_way(char *end_room, t_room **head)
 		return (NULL);
 	}
 	return (new);
-
 }
 
 void	pushback_way(t_way *head_way, t_way *n_way)
 {
-	t_way  *current;
+	t_way	*current;
 
 	current = head_way;
 	while (current->next != NULL)
@@ -53,19 +52,14 @@ void	pushback_way(t_way *head_way, t_way *n_way)
 
 char	start_way(char *str, t_room **head)
 {
-	char  **room_way;
+	char	**room_way;
 	t_room	*current;
-	t_way 	*n_way;
+	t_way	*n_way;
 
 	current = *head;
 	room_way = ft_strsplit(str, '-');
 	n_way = new_way(room_way[1], head);
-	if (n_way == NULL)
-	{
-		free_array(room_way);
-		return (0);
-	}
-	while (current != NULL)
+	while (current != NULL && n_way != NULL)
 	{
 		if (ft_strequ(current->name, room_way[0]))
 		{
@@ -87,13 +81,12 @@ char	start_way(char *str, t_room **head)
 void	return_trip(char *str, t_room **head)
 {
 	char	**room_way;
-	t_room  *current;
-	t_way 	*n_way;
+	t_room	*current;
+	t_way	*n_way;
 
 	current = *head;
 	room_way = ft_strsplit(str, '-');
 	n_way = new_way(room_way[0], head);
-	//n_way->content_size = -1;
 	while (current != NULL)
 	{
 		if (ft_strequ(current->name, room_way[1]))
@@ -110,25 +103,4 @@ void	return_trip(char *str, t_room **head)
 	}
 	free(n_way);
 	free_array(room_way);
-}
-
-void	test_way(t_room **head)
-{
-	t_room *current;
-	t_way *cur_way;
-
-	current = *head;
-	while (current != NULL)
-	{
-		if (current->next_way != NULL)
-		{
-			cur_way = current->next_way;
-			while (cur_way != NULL)
-			{
-				//printf("start %s (line = %d, name = %s) -----> end %s\n", current->name, cur_way->content_size, cur_way->name_room, cur_way->content->name);
-				cur_way = cur_way->next;
-			}
-		}
-		current = current->next;
-	}
 }

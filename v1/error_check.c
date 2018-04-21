@@ -10,31 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
-#include <stdio.h>
-
-char	start_and_end(t_room *room_head)
-{
-	t_room *current;
-
-	current = room_head;
-	while (current)
-	{
-		if (current->status == 1)
-		{
-			current = room_head;
-			while (current)
-			{
-				if (current->status == 2)
-					return (1);
-				current = current->next;
-			}
-			return (0);
-		}
-		current = current->next;
-	}
-	return (0);
-}
+#include "lem_in.h"
 
 int		str_to_num(char *str)
 {
@@ -103,30 +79,9 @@ void	plag_room(char **room, t_room **room_head)
 	{
 		if (ft_strequ(current->name, room[0]))
 			display_error("room name reserved");
-		else if (current->x == ft_atoi_lem(room[1]) && current->y == ft_atoi_lem(room[2]))
+		else if (current->x == ft_atoi_lem(room[1])\
+			&& current->y == ft_atoi_lem(room[2]))
 			display_error("coordinates are reserved");
 		current = current->next;
 	}
-}
-
-char	way_first(char *str)
-{
-	char **arr;
-	int		i;
-
-	if (!ft_strchr(str, ' '))
-	{
-		arr = ft_strsplit(str, '-');
-		i = 0;
-		while (arr[i])
-			i++;
-		if (i == 2)
-		{
-			free_array(arr);
-			return (1);
-		}
-		free_array(arr);
-		return (0);
-	}
-	return (0);
 }

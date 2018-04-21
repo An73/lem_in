@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 void	distribution(t_arr_way **head)
 {
-	t_arr_way *current;
-	int		pass;
+	t_arr_way	*current;
+	int			pass;
 
 	current = *head;
 	pass = 0;
@@ -41,7 +41,7 @@ void	distribution(t_arr_way **head)
 
 void	printer(t_down *head, char flag)
 {
-	t_down *current;
+	t_down	*current;
 
 	current = head;
 	while (current)
@@ -59,7 +59,7 @@ void	printer(t_down *head, char flag)
 
 void	rider(int id, t_down *head, char flag)
 {
-	t_down *current;
+	t_down	*current;
 
 	current = head;
 	while (current->next != NULL)
@@ -73,11 +73,11 @@ void	rider(int id, t_down *head, char flag)
 	printer(head, flag);
 }
 
-void	run(int	num_lem, t_arr_way **head)
+void	run(int num_lem, t_arr_way **head)
 {
-	int		id;
-	char	flag;
-	t_arr_way *current;
+	int			id;
+	char		flag;
+	t_arr_way	*current;
 
 	id = 1;
 	while (id == 1 || go_stop(head))

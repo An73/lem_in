@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 void	strjoin_lem(char **write, char *str)
 {
-	char  *tmp;
+	char	*tmp;
 
 	tmp = *write;
 	*write = ft_strjoin(*write, "\n");
