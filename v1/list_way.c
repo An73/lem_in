@@ -85,6 +85,8 @@ void		list_way(t_arr_way **head, t_way *head_fin)
 	t_arr_way	*arr;
 	t_way		*way_current;
 
+	way_current = NULL;
+	arr = NULL;
 	way_current = head_fin;
 	while (way_current)
 	{

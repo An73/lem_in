@@ -40,7 +40,7 @@ char	way_first(char *str)
 	char	**arr;
 	int		i;
 
-	if (!ft_strchr(str, ' '))
+	if (!ft_strchr(str, ' ') && str[0] != '#')
 	{
 		arr = ft_strsplit(str, '-');
 		i = 0;

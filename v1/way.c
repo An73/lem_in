@@ -50,6 +50,12 @@ void	pushback_way(t_way *head_way, t_way *n_way)
 	current->next = n_way;
 }
 
+void	free_all(t_way **n_way, char **room_way)
+{
+	free(&n_way);
+	free_array(room_way);
+}
+
 char	start_way(char *str, t_room **head)
 {
 	char	**room_way;
@@ -57,6 +63,8 @@ char	start_way(char *str, t_room **head)
 	t_way	*n_way;
 
 	current = *head;
+	if (str[0] == '\0')
+		return (0);
 	room_way = ft_strsplit(str, '-');
 	n_way = new_way(room_way[1], head);
 	while (current != NULL && n_way != NULL)
@@ -73,8 +81,7 @@ char	start_way(char *str, t_room **head)
 		}
 		current = current->next;
 	}
-	free(n_way);
-	free_array(room_way);
+	free_all(&n_way, room_way);
 	return (0);
 }
 
