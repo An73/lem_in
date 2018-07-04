@@ -67,7 +67,7 @@ char	start_way(char *str, t_room **head)
 		return (0);
 	room_way = ft_strsplit(str, '-');
 	n_way = new_way(room_way[1], head);
-	while (current != NULL && n_way != NULL)
+	while (current != NULL && n_way != NULL && ch_way(str))
 	{
 		if (ft_strequ(current->name, room_way[0]))
 		{
@@ -81,7 +81,7 @@ char	start_way(char *str, t_room **head)
 		}
 		current = current->next;
 	}
-	free_all(&n_way, room_way);
+	free_array(room_way);
 	return (0);
 }
 
@@ -94,7 +94,7 @@ void	return_trip(char *str, t_room **head)
 	current = *head;
 	room_way = ft_strsplit(str, '-');
 	n_way = new_way(room_way[0], head);
-	while (current != NULL)
+	while (current != NULL && ch_way(str))
 	{
 		if (ft_strequ(current->name, room_way[1]))
 		{

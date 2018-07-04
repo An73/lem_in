@@ -82,5 +82,6 @@ void				free_way(t_arr_way **head);
 void				pushback(t_room **head, t_room *new);
 void				list_add_start(t_down **head, t_down *new);
 void				pushback_arr(t_arr_way **head, t_arr_way *new);
+char				ch_way(char *str);
 
 #endif

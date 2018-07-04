@@ -56,3 +56,21 @@ char	way_first(char *str)
 	}
 	return (0);
 }
+
+char	ch_way(char *str)
+{
+	int		i;
+	int		def;
+
+	i = 0;
+	def = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '-')
+			def++;
+		i++;
+	}
+	if (def == 1)
+		return (1);
+	return (0);
+}
